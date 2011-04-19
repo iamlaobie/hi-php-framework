@@ -1,0 +1,107 @@
+<script type="text/javascript" src="/static/js/common/jquery.validate.js"></script>
+
+
+<form action='/db/table/action/save?userID={$row.userID}' name='hiTableForm_user' id='hiTableForm_user' method='post'>
+<table>
+    <tr>
+        <td class='hi_form_left'>用户名：</td>
+        <td class="hi_form_right"><input type="text" name="userName" id="userName" value="{$hiTableRow.userName}"  /></td>
+    </tr>
+    <tr>
+        <td class='hi_form_left'>密码：</td>
+        <td class="hi_form_right"><input type="text" name="password" id="password" value="{$hiTableRow.password}"  /></td>
+    </tr>
+    <tr>
+        <td class='hi_form_left'>email：</td>
+        <td class="hi_form_right"><input type="text" name="email" id="email" value="{$hiTableRow.email}"  /></td>
+    </tr>
+    <tr>
+        <td class='hi_form_left'>status：</td>
+        <td class="hi_form_right"><input type="text" name="status" id="status" value="{$hiTableRow.status}"  /></td>
+    </tr>
+    <tr>
+        <td class='hi_form_left'>isLock：</td>
+        <td class="hi_form_right">{html_radios name="isLock" separator="&nbsp;&nbsp;" options=$isLockSrc selected=$hiTableRow.isLock|addslashes}</td>
+    </tr>
+    <tr>
+        <td class='hi_form_left'>注册时间：</td>
+        <td class="hi_form_right"><input type="text" name="joinTime" id="joinTime" value="{$hiTableRow.joinTime}"  /></td>
+    </tr>
+    <tr>
+        <td class='hi_form_left'>loginTime：</td>
+        <td class="hi_form_right"><input type="text" name="loginTime" id="loginTime" value="{$hiTableRow.loginTime}"  /></td>
+    </tr>
+    <tr>
+        <td class='hi_form_left'>lastLoginTime：</td>
+        <td class="hi_form_right"><input type="text" name="lastLoginTime" id="lastLoginTime" value="{$hiTableRow.lastLoginTime}"  /></td>
+    </tr>
+    <tr>
+        <td class='hi_form_left'>lastLoginIP：</td>
+        <td class="hi_form_right"><input type="text" name="lastLoginIP" id="lastLoginIP" value="{$hiTableRow.lastLoginIP}"  /></td>
+    </tr>
+    <tr>
+        <td class='hi_form_left'>activeTime：</td>
+        <td class="hi_form_right"><input type="text" name="activeTime" id="activeTime" value="{$hiTableRow.activeTime}"  /></td>
+    </tr>
+    <tr>
+        <td class='hi_form_left'></td>
+        <td class='hi_form_right'>
+
+        						<input type='submit' class='hi_form_submit' name='btnSubmit' id='btnSubmit' value='提交' />
+
+        						<input type='button' onclick='window.location.href="{$backurl}";' class='hi_form_cancel' name='btnCancel' id='btnCancel' value='取消' />
+        						<input type='hidden' name='backurl' id='backurl' value='{$backurl}' />
+
+        						<input type='hidden' name='rawPrimaryKey' id='rawPrimaryKey' value='{$hiTableRow.userID}' />
+
+        				   </td>
+    </tr>
+</table>
+</form>
+
+{literal}
+<style>
+.error{color:red;}
+.hi_form_left{text-align:right;}
+.hi_form_right{text-align:left;}
+</style>
+<!--建议调试结束后，将此段js代码用js文件引入--><script>
+
+$(document).ready(function(){
+$('#hiTableForm_user').validate({
+
+    rules:{
+        userID:{number:true,remote:{url:"/db/table/action/isValid", data: {userID : function(){return $("#userID").val();},userID : function(){return $("#rawPrimaryKey").val();}}}},
+        userName:{maxlength:50,remote:{url:"/db/table/action/isValid", data: {userName : function(){return $("#userName").val();},userID : function(){return $("#rawPrimaryKey").val();}}}},
+        password:{maxlength:50},
+        email:{maxlength:100,email:true},
+        status:{number:true},
+        isLock:{number:true},
+        lastLoginIP:{maxlength:16}
+    },
+
+
+
+    messages:{
+        userID:{number:'请输入数字',remote:'userID已经存在，请重新输入'},
+        userName:{maxlength:'userName最长可输入50个字符',remote:'userName已经存在，请重新输入'},
+        password:{maxlength:'password最长可输入50个字符'},
+        email:{maxlength:'email最长可输入100个字符',email:'请输入正确的email地址'},
+        status:{number:'请输入数字'},
+        isLock:{number:'请输入数字'},
+        lastLoginIP:{maxlength:'lastLoginIP最长可输入16个字符'}
+    }
+
+});
+
+$('#joinTime').datepicker({dateFormat:'yy-mm-dd'})
+$('#loginTime').datepicker({dateFormat:'yy-mm-dd'})
+$('#lastLoginTime').datepicker({dateFormat:'yy-mm-dd'})
+$('#activeTime').datepicker({dateFormat:'yy-mm-dd'})
+
+
+});
+
+
+</script>
+{/literal}
