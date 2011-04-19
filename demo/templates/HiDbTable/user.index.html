@@ -1,0 +1,53 @@
+<form>
+     用户名：<input type="text" name="userName" id="userName" value="{$userName}"  /><br /><br />
+     注册时间大于：<input type="text" name="joinTimeMoreThan" id="joinTimeMoreThan" value="{$joinTimeMoreThan}"  /><br /><br />
+     注册时间小于：<input type="text" name="joinTimeLessThan" id="joinTimeLessThan" value="{$joinTimeLessThan}"  /><br /><br />
+{literal}
+<script>$('#joinTimeMoreThan').datepicker({dateFormat:'yy-mm-dd'})
+$('#joinTimeLessThan').datepicker({dateFormat:'yy-mm-dd'})
+</script>{/literal}<input type='submit' value='查找' /><br /><br />
+
+</form><div style='float:right'>[<a href='/db/table/action/form'>添加</a>]</div>
+<table class='hi_table' id='hi_table_user'>
+    <tr class='hi_table_thead'>
+        <th class='hi_table_th'><input type="checkbox" name="hi_table_checkAll" id="checkAll" /></th>
+        <th class='hi_table_th'>userID</th>
+        <th class='hi_table_th'>用户名</th>
+        <th class='hi_table_th'>密码</th>
+        <th class='hi_table_th'>email</th>
+        <th class='hi_table_th'>status</th>
+        <th class='hi_table_th'>isLock</th>
+        <th class='hi_table_th'>注册时间</th>
+        <th class='hi_table_th'>loginTime</th>
+        <th class='hi_table_th'>lastLoginTime</th>
+        <th class='hi_table_th'>lastLoginIP</th>
+        <th class='hi_table_th'>activeTime</th>
+        <th class='hi_table_th'>操作</th>
+    </tr>
+    {foreach from=$hiTableRows item=hiTableRow}
+    <tr class='hi_table_tr'>
+        <td class='hi_table_td'><input type="checkbox" name="hi_table_checItem[]" value="{$hiTableRow.userID}" id="checkItem_{$hiTableRow.userID}"/></td>
+        <td class='hi_table_td'>{$hiTableRow.userID}</td>
+        <td class='hi_table_td'>{$hiTableRow.userName}</td>
+        <td class='hi_table_td'>{$hiTableRow.password}</td>
+        <td class='hi_table_td'>{$hiTableRow.email}</td>
+        <td class='hi_table_td'>{$hiTableRow.status}</td>
+        <td class='hi_table_td'>{$hiTableRow.isLock}</td>
+        <td class='hi_table_td'>{$hiTableRow.joinTime}</td>
+        <td class='hi_table_td'>{$hiTableRow.loginTime}</td>
+        <td class='hi_table_td'>{$hiTableRow.lastLoginTime}</td>
+        <td class='hi_table_td'>{$hiTableRow.lastLoginIP}</td>
+        <td class='hi_table_td'>{$hiTableRow.activeTime}</td>
+        <td class='hi_table_td'>[<a class='hi_table_action' href='/db/table/action/form?userID={$hiTableRow.userID}&backurl=%2Fdb%2Ftable%2Faction%2F%3FuserName%3Dz%26joinTimeMoreThan%3D2010-11-28%26joinTimeLessThan%3D'>修改</a>]&nbsp;&nbsp;[<a onclick='return confirm("确认要删除？")' class='hi_table_action' href='/db/table/action/delete?userID={$hiTableRow.userID}&backurl=%2Fdb%2Ftable%2Faction%2F%3FuserName%3Dz%26joinTimeMoreThan%3D2010-11-28%26joinTimeLessThan%3D'>删除</a>]&nbsp;&nbsp;</td>
+    </tr>
+    {/foreach}
+</table>
+
+<div style='width:100%' class='hi_table_toolbar'>
+    <div style='float:left' class='hi_table_selector'>
+         <a id='hi_table_selector_all' href='javascript:;'>全选</a>&nbsp;&nbsp;
+		  <a id='hi_table_selector_reverse' href='javascript:;'>反选</a>&nbsp;&nbsp;
+         <a id='hi_table_selector_no' href='javascript:;'>不选</a>
+    </div>
+    <div style='float:right' class='hi_table_pagerbar'>{$pagerBar}</div>
+</div>
