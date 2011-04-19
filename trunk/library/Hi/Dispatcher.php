@@ -61,20 +61,14 @@ class Hi_Dispatcher
         if (empty($uri)) {
             $uri = $this->_getUriFromRequest();
         }
-
-        if (empty($uri)) {
-            $this->_class = 'Action_Index';
-            $this->_action = 'Index';
-            return true;
-        }
         
         //去掉开头和结尾的斜线
         $uri = preg_replace('/\/$/', '', $uri);
         $uri = preg_replace('/^\//', '', $uri);
-        
-        if (! preg_match('/^[a-z]+(\/[a-z][a-z0-9]+\/?)*$/i', $uri)) {
-            header('location:/');
-            exit();
+        if (empty($uri) || ! preg_match('/^[a-z]+(\/[a-z][a-z0-9]+\/?)*$/i', $uri)) {
+            $this->_class = 'Action_Index';
+            $this->_action = 'Index';
+            return true;
         }
 
         $doArray = explode('/', $uri);

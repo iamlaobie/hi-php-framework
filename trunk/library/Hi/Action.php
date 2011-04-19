@@ -93,7 +93,7 @@ abstract class Hi_Action
     }
     public function __call ($function, $param)
     {
-        throw new Hi_Exception('错误的请求，请检查参数', 'error');
+        throw new Hi_Exception('错误的请求，请检查参数');
     }
     protected function _redirect ($url = null)
     {
