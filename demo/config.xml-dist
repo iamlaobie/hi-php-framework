@@ -1,30 +1,30 @@
 ﻿<?xml version="1.0" ?>
 <configdata>
-     应用的唯一标识，在同一台机器上配置多个应用时，可能框架产生的临时数据会有冲突，用此标识不同的应用 
+    <!-- 应用的唯一标识，在同一台机器上配置多个应用时，可能框架产生的临时数据会有冲突，用此标识不同的应用 -->
     <appid>hiapper</appid>
     
-     是否debug模式 
+    <!-- 是否debug模式 -->
     <debug>true</debug>
     
-     时区 
+    <!-- 时区 -->
     <timezone>PRC</timezone>
     
-   	 是否开启缓存 
+   	<!-- 是否开启缓存 -->
    	<cacheable>true</cacheable>
    	
-   	 默认缓存类型 
+   	<!-- 默认缓存类型 -->
    	<cachetype>memcached</cachetype>
    
-   	 运行时的临时路径，默认为系统的缓存路径，一般linux下为/tmp;windows下为用户路径 
+   	<!-- 运行时的临时路径，默认为系统的缓存路径，一般linux下为/tmp;windows下为用户路径 -->
    	<tmp>d:/tmp</tmp>
    	
-   	 文件缓存路径，默认为"/tmp_path/cache/$appid" 
+   	<!-- 文件缓存路径，默认为"/tmp_path/cache/$appid" -->
    	<cache></cache>
    	
-   	 日志路径 
+   	<!-- 日志路径 -->
     <log></log>
         
-     memcached配置 
+    <!-- memcached配置 -->
     <memcached>
     	<host>localhost</host> 
     	<port>11211</port>
@@ -34,16 +34,16 @@
     	<port>11211</port>
     </memcached>
     
-     数据库配置 ,可配置多个数据库 
+    <!-- 数据库配置 ,可配置多个数据库 -->
     <db>
-                    在此，default为数据库配置名，
-                    在调用数据库时，如果没有给出具体的数据库配置名,将调用该配置 
+        <!-- 在此，default为数据库配置名，
+        	 在调用数据库时，如果没有给出具体的数据库配置名,将调用该配置 -->
         <default>
             <type>mysql</type>
             <host>localhost</host>
             <username>root</username>
             <password>123456</password>
-            <dbname>test_db</dbname>
+            <dbname>jubanr_new</dbname>
             <persistent>true</persistent>
             <charset>utf8</charset>
             <rw>rw</rw>
@@ -53,7 +53,7 @@
             <host>localhost</host>
             <username>root</username>
             <password>123456</password>
-            <dbname>test_db</dbname>
+            <dbname>jubanr_new</dbname>
             <persistent>true</persistent>
             <charset>utf8</charset>
             <rw>r</rw>
@@ -63,25 +63,25 @@
     <smarty>
     	<templete></templete>
     	
-    	 模板解析缓存路径 ，默认为临时路径下的template_c
+    	<!-- 模板解析缓存路径 ，默认为临时路径下的template_c-->
     	<template_c></template_c>
     	
-    	 框架的模板使用的smarty，如果有自己的模板插件，请在此添加插件路径，多个路径用,分割 
+    	<!-- 框架的模板使用的smarty，如果有自己的模板插件，请在此添加插件路径，多个路径用,分割 -->
     	<plugindir></plugindir>
     	
-    	 是否debug 
+    	<!-- 是否debug -->
     	<debug></debug>
     	
-    	 是否启用缓存 
+    	<!-- 是否启用缓存 -->
     	<cache></cache>
     </smarty>
     
-     cookie参数 
+    <!-- cookie参数 -->
     <cookie>
-         cookie前缀 
+        <!-- cookie前缀 -->
         <prefix>jbr_</prefix>
         
-                    用于加密cookie的密钥 
+        <!-- 用于加密cookie的密钥 -->
         <pinkey>12345678</pinkey>
     </cookie>
 </configdata>

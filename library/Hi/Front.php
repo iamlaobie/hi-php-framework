@@ -32,8 +32,7 @@ class Hi_Front
         $dr = $_SERVER['DOCUMENT_ROOT'] . DS;
         $dr = Hi_Tool_Dir::standard($dr);
         
-        $appPath = Hi_Tool_Dir::standard($appPath);
-        
+        $appPath = realpath($appPath);
         define('DOC_ROOT', $dr);
         Hi_Env::$DOC_ROOT = $dr;
         $this->_setApp($appPath);
