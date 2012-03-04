@@ -48,6 +48,17 @@
             <charset>utf8</charset>
             <rw>rw</rw>
         </default>
+        <spider>
+            <type>mysql</type>
+            <host>localhost</host>
+            <username>weibo</username>
+            <password>weibo</password>
+            <port>33061</port>
+            <dbname>spider</dbname>
+            <persistent>true</persistent>
+            <charset>utf8</charset>
+            <rw>r</rw>
+        </spider>
     </db>
     
     <smarty>
