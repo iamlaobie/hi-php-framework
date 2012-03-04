@@ -148,8 +148,8 @@ class Hi_Front
         
         //预先加载该uri对应的类
         $cache = Hi_Cache::factory('file');
-        $req = parse_url($_SERVER['REQUEST_URI']);
-        $key = $req['path'] . '::classes';
+        
+        $key = $this->_reqPath() . '::classes';
         $files = $cache->get($key, true);
         if ($files) {
             for ($i = 0, $n = count($files); $i < $n; $i ++) {
@@ -189,13 +189,24 @@ class Hi_Front
         }
     }
     
+    private function _reqPath()
+    {
+        if(php_sapi_name() == 'cli'){
+            $path = $_SERVER['argv'][1];
+        }else{
+            $req = parse_url($_SERVER['REQUEST_URI']);
+            $path = $req['path'];
+        }
+        return $path;
+    }
+    
     /**
      * 析构时将本次请求所加载的类写入到文件缓存，下次预先加载
      */
     public function __destruct ()
     {
-        $req = parse_url($_SERVER['REQUEST_URI']);
-        $key = $req['path'] . '::classes';
+        $path = $this->_reqPath();
+        $key = $path . '::classes';
         $cache = Hi_Cache::factory('file');
         if (! $cache->exist($key)) {
             $cache->set($key, self::$_classes, 3600);
