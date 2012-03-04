@@ -45,7 +45,10 @@ class Hi_Db_Adapter_Mysql extends Hi_Db_Adapter_Abstract
         //随机从满足读写性要求的服务器中挑选出一台服务器
         $index = rand(0, sizeof($params[$rw]) - 1);
         $params = $params[$rw][$index];
-        $dsn = "mysql:host={$params['host']};dbname={$params['dbname']}";
+        if(!isset($params['port'])){
+            $params['port'] = '3306';
+        }
+        $dsn = "mysql:host={$params['host']};port={$params['port']};dbname={$params['dbname']}";
         $pdo = new PDO($dsn, $params['username'], $params['password']);
         if ($params['persistent']) {
             $pdo->setAttribute(PDO::ATTR_PERSISTENT, true);

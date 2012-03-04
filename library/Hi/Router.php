@@ -46,6 +46,9 @@ class Hi_Router
      */
     static public function route ($uri)
     {
+        if(php_sapi_name() == 'cli'){
+            return null;
+        }
         $uri = substr($_SERVER['REQUEST_URI'], 1);
         foreach (self::$_routers as $router) {
             if (! preg_match($router[0], $uri, $regs)) {
@@ -72,7 +75,7 @@ class Hi_Router
                 
                 if(array_key_exists($refKey, $params)){
                     foreach($params[$refKey] as $name){
-                        $reqParams[$name] = $val;    
+                        $reqParams[$name] = $val;
                     }
                     
                 }
